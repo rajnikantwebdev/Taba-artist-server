@@ -12,21 +12,21 @@ app.get('/', (req, res) => {
 })
 
 app.post('/send-email', (req, res) => {
-    const { name, email, message } = req.body;
-  
+    const { firstName, lastName, email, message } = req.body;
+    console.log('email submitted', req.body)
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'sandbox.smtp.mailtrap.io',
       auth: {
-        user: 'rsusishere@gmail.com',
-        pass: 'rajnikisajni@2003',
+        user: '5cd1f7fccf43e9',
+        pass:'8c69f1eac1b8cc',
       },
     });
   
     const mailOptions = {
       from: email,
       to: 'rsusishere@gmail.com',
-      subject: `Contact Form Submission from ${name}`,
-      html: `Name: ${name}<br>Email: ${email}<br>Message: ${message}`,
+      subject: `Contact Form Submission from ${firstName + lastName}`,
+      html: `Name: ${firstName + lastName}<br>Email: ${email}<br>Message: ${message}`,
     };
   
     transporter.sendMail(mailOptions, (error, info) => {
